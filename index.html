@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アンケート</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #question-container {
+            display: none;
+            background-color: pink;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            background-color: yellow;
+            border: none;
+            width: 45%;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #result {
+            display: none;
+            background-color: rgb(199, 252, 170);
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            animation: zoomin 3.5s;
+        }
+        @keyframes zoomin {
+  0% {
+    transform: scale(0.2);
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+    transform: scale(1);
+  }
+}
+.flex {
+  display: flex; /*横並び*/
+}
+container {
+  display: flex;
+  justify-content: space-evenly;
+}
+p.center{
+  text-align: center;
+}
+
+    </style>
+</head>
+<body>
+<p >
+    <div id="start-container" ><p class="center">
+       <img src="e430235b.jpg" height="100px"></p><h1> 
+        ロックキューブ体力スト</h1>
+        <input type="text" id="name" placeholder="お名前" required>
+        <select id="gender">
+            <option value="male">男性</option>
+            <option value="female">女性</option>
+        </select>
+        <button onclick="startSurvey()">開始</button>
+    </div>
+<p justify-content: space-evenly;>
+    <div id="question-container">
+        <h2 id="question-text"></h2>
+        <div id="options"></div>
+    </div>
+</p>
+    <div id="result">ロックキューブ体力テスト<canvas id="myRadar" style="width: 100%; height: 300px;"></canvas>
+        <dvi class="flex">
+            <img id="gazo" name="gazo" style="height : 100px"> 
+        <h2 id="result-text"></h2>
+</dvi>
+    </div>
+
+    <script>
+        const questions = [
+            { text: "質問1: ビーストメーカー7秒ぶら下がれるのは何mm？", options: ["15mm", "10mm", "7mm", "5mm"], scores: [1, 2, 3, 4] },
+            { text: "質問2: 10mmで何秒ぶら下がれる？", options: ["10秒以下","10秒～30秒","30秒～1分","1分以上"], scores: [1, 2, 3, 4] },
+            { text: "質問3: 懸垂何回できる？", options: ["5回未満",  "5～10回", "11～20回", "20回以上"], scores: [1, 2, 3, 4] }
+        ];
+
+        let currentQuestionIndex = 0;
+        let totalScore = 0;
+        let userName = '';
+        var genderf = 0;
+        var maxpoint = 0;
+        var maxpointi = 0;
+        var maxpointii = 0;
+        var point=[];
+        function startSurvey() {
+            const nameInput = document.getElementById("name").value;
+            const genderInput = document.getElementById("gender").value;
+
+            if (!nameInput || !genderInput) {
+                alert("名前と性別を入力してください。");
+                return;
+            }
+            if (genderInput == "male") {
+                genderf = 1;
+            }
+            else if(genderInput == "female"){
+                genderf = 2;
+            }
+
+            userName = nameInput;
+            document.getElementById("start-container").style.display = "none";
+            document.getElementById("question-container").style.display = "block";
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                const question = questions[currentQuestionIndex];
+                document.getElementById("question-text").textContent = question.text;
+                const optionsContainer = document.getElementById("options");
+                optionsContainer.innerHTML = '';
+                question.options.forEach((option, index) => {
+                    const button = document.createElement("button");
+                    button.textContent = option;
+                    button.classList.add("button");
+                    button.onclick = () => selectOption(index);
+                    optionsContainer.appendChild(button);
+                });
+            } else {
+                showResult();
+            }
+        }
+
+        function selectOption(index) {
+            totalScore += questions[currentQuestionIndex].scores[index];
+            point.push(questions[currentQuestionIndex].scores[index]);
+if( maxpoint == questions[currentQuestionIndex].scores[index] ){
+    maxpointii = currentQuestionIndex+1;
+}
+           else if( maxpoint < questions[currentQuestionIndex].scores[index] ){
+            maxpointi = currentQuestionIndex+1;
+            maxpoint = questions[currentQuestionIndex].scores[index];
+            maxpointii =0;
+            }
+            currentQuestionIndex++;
+            showQuestion();
+        }
+    
+
+        var myRadarElement = document.getElementById("myRadar");
+ 
+        function ShowImage(){
+            if(maxpointi ==1 && maxpointii == 2){
+    document.getElementById("gazo").src="チーター.png";
+    document.getElementById("gazo").alt="チーター";
+}
+else if(maxpointi ==1 && maxpointii == 3){
+    document.getElementById("gazo").src="サメ.png";
+    document.getElementById("gazo").alt="サメ";
+}
+else if(maxpointi ==2 && maxpointii == 3){
+    document.getElementById("gazo").src="うま.png";
+    document.getElementById("gazo").alt="うま";
+}
+else if ( maxpointi == 1) {
+    document.getElementById("gazo").src="ワシ.png";
+    document.getElementById("gazo").alt="ワシ";
+}else if( maxpointi == 2){
+    document.getElementById("gazo").src="マグロ.png";
+    document.getElementById("gazo").alt="マグロ";
+}else if( maxpointi == 3){
+    document.getElementById("gazo").src="ゴリラ.png";
+    document.getElementById("gazo").alt="ゴリラ";
+}
+}
+
+
+        function showResult() {
+            ShowImage();
+            document.getElementById("question-container").style.display = "none";
+            document.getElementById("result").style.display = "block";
+if(maxpointi ==1 && maxpointii == 2){
+    document.getElementById("result-text").innerText =`${userName}は チーター タイプです。(持久力,カチ)\n 総合点は ${totalScore}点です`;
+}
+else if(maxpointi ==1 && maxpointii == 3){
+    document.getElementById("result-text").innerText =`${userName}は サメ タイプです。(パワー,カチ)\n 総合点は ${totalScore}点です`;
+}
+else if(maxpointi ==2 && maxpointii == 3){
+    document.getElementById("result-text").innerText =`${userName}は うま タイプです。(持久力,パワー)\n 総合点は ${totalScore}点です`;
+}
+else if ( maxpointi == 1) {
+    document.getElementById("result-text").innerText =`${userName}は ワシ タイプです。(カチ)\n 総合点は ${totalScore}点です`;
+}else if( maxpointi == 2){
+    document.getElementById("result-text").innerText =`${userName}は マグロ タイプです。(持久力)\n 総合点は ${totalScore}点です`;
+}else if( maxpointi == 3){
+    document.getElementById("result-text").innerText =`${userName}は ゴリラ タイプです。(パワー)\n 総合点は ${totalScore}点です`;
+}
+
+        if(genderf == 1){
+        var datasets = 
+[ {
+                        label: 'あなたの体力測定結果',
+                          lineTension: 0, // ベジェ曲線を無効化
+                          data: [point[0], point[1], point[2]],
+                          backgroundColor: 'RGBA(96,218,255, 0.4)',
+                          borderColor: 'RGBA(101,96,255, 1)',
+                          borderWidth: 1,
+                          pointBackgroundColor: 'RGB(46,106,177)'
+                        }];
+                    }
+                    else if(genderf == 2){
+                        var datasets = 
+[ {
+                          label: 'あなたの体力測定結果',
+                          lineTension: 0, // ベジェ曲線を無効化
+                          data: [point[0], point[1], point[2]],
+                          backgroundColor: 'RGBA(255,96,202, 0.4)',
+                          borderColor: 'RGBA(182,39,93, 1)',
+                          borderWidth: 1,
+                          pointBackgroundColor: 'RGB(46,106,177)'
+                        }];
+                    }
+
+                      var myRadar = new Chart(myRadarElement, {
+                      type: 'radar', // チャートのタイプ
+                      data: { // チャートの内容
+                        labels: ["カチ", "持久力", "パワー"],
+                        datasets: datasets },
+                        options: { 
+                          scale:{
+                            ticks:{
+                              suggestedMin: 0,
+                              suggestedMax: 4,
+                              stepSize: 1
+                            }
+                          }
+                        }
+                      });
+                    }
+
+        function restartSurvey() {
+            currentQuestionIndex = 0;
+            totalScore = 0;
+            userName = '';
+            document.getElementById("start-container").style.display = "block";
+            document.getElementById("question-container").style.display = "none";
+            document.getElementById("result").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
