@@ -31,7 +31,7 @@
         .button {
             background-color: yellow;
             border: none;
-            width: 40%;
+            width: 45%;
             padding: 10px 20px;
             margin: 10px;
             cursor: pointer;
@@ -91,7 +91,8 @@ p.center{
     <div id="result">ロックキューブ体力テスト<canvas id="myRadar" style="width: 100%; height: 300px;"></canvas>
         <dvi class="flex">
             <img id="gazo" name="gazo" style="height : 100px"> 
-        <h2 id="result-text"></h2>
+            <font size="1">
+        <h2 id="result-text"></h2></font>
 </dvi>
     </div>
 
@@ -163,12 +164,18 @@ if( maxpoint == questions[currentQuestionIndex].scores[index] ){
             currentQuestionIndex++;
             showQuestion();
         }
-    
-
         var myRadarElement = document.getElementById("myRadar");
  
         function ShowImage(){
-            if(maxpointi ==1 && maxpointii == 2){
+            let tunayosi = 0;
+for (let i = 0; i < point.length; i++) {
+  tunayosi = tunayosi + point[i];
+}
+            if(tunayosi == 12){
+    document.getElementById("gazo").src="綱吉.png";
+    document.getElementById("gazo").alt="綱吉";
+            }
+            else if(maxpointi ==1 && maxpointii == 2){
     document.getElementById("gazo").src="チーター.png";
     document.getElementById("gazo").alt="チーター";
 }
@@ -195,9 +202,16 @@ else if ( maxpointi == 1) {
 
         function showResult() {
             ShowImage();
+            let tunayosi = 0;
+for (let i = 0; i < point.length; i++) {
+  tunayosi = tunayosi + point[i];
+}
             document.getElementById("question-container").style.display = "none";
             document.getElementById("result").style.display = "block";
-if(maxpointi ==1 && maxpointii == 2){
+            if(tunayosi == 12){
+    document.getElementById("result-text").innerText =`${userName}は 全項目満点です!! \n あなたなら綱吉バッチが狙えるかも!? `;
+}
+else if(maxpointi ==1 && maxpointii == 2){
     document.getElementById("result-text").innerText =`${userName}は チーター タイプです。(持久力,カチ)\n 総合点は ${totalScore}点です`;
 }
 else if(maxpointi ==1 && maxpointii == 3){
