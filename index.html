@@ -283,12 +283,7 @@ if( maxpoint == questions[currentQuestionIndex].scores[index] ){
 for (let i = 0; i < point.length; i++) {
   tunayosi = tunayosi + point[i];
 }
-            if(tunayosi == 12){
-    document.getElementById("gazo").src="綱吉.png";
-    document.getElementById("gazo").alt="綱吉";
-            }
-            
-else if ( maxpointi == 1) {
+if ( maxpointi == 1) {
     document.getElementById("gazo").src="ムシ.png";
     document.getElementById("gazo").alt="ムシ";
 }else if( maxpointi == 2){
@@ -324,17 +319,17 @@ let totalPoints = point.reduce((acc, val) => acc + val, 0);
     document.getElementById("result-text").innerText =`${userName}さんは 全項目満点です!! \n あなたなら綱吉バッチが狙えるかも!? `;
 }
 else if ( maxpointi == 1) {
-    document.getElementById("result-text").innerText =`${userName}さんは ムシ タイプです。(カチ)\n 総合点は ${totalScore}点です`;
+    document.getElementById("result-text").innerText =`${userName}さんは ムシ タイプです。\n 総合点は ${totalScore}点です`;
 }else if( maxpointi == 2){
-    document.getElementById("result-text").innerText =`${userName}さんは ヤモリ タイプです。(持久力)\n 総合点は ${totalScore}点です`;
+    document.getElementById("result-text").innerText =`${userName}さんは ヤモリ タイプです。\n 総合点は ${totalScore}点です`;
 }else if( maxpointi == 3){
-    document.getElementById("result-text").innerText =`${userName}さんは ゴリラ タイプです。(パワー)\n 総合点は ${totalScore}点です`;
+    document.getElementById("result-text").innerText =`${userName}さんは ゴリラ タイプです。\n 総合点は ${totalScore}点です`;
 }else if( maxpointi == 4){
-    document.getElementById("result-text").innerText =`${userName}さんは タコ タイプです。(パワー)\n 総合点は ${totalScore}点です`;
+    document.getElementById("result-text").innerText =`${userName}さんは タコ タイプです。\n 総合点は ${totalScore}点です`;
 }else if( maxpointi == 5){
-    document.getElementById("result-text").innerText =`${userName}さんは 忍者 タイプです。(パワー)\n 総合点は ${totalScore}点です`;
+    document.getElementById("result-text").innerText =`${userName}さんは 忍者 タイプです。\n 総合点は ${totalScore}点です`;
 }else if( maxpointi == 6){
-    document.getElementById("result-text").innerText =`${userName}さんは ターザン タイプです。(パワー)\n 総合点は ${totalScore}点です`;
+    document.getElementById("result-text").innerText =`${userName}さんは ターザン タイプです。\n 総合点は ${totalScore}点です`;
 }
 
         if(genderf == 1){
