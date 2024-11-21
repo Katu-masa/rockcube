@@ -70,8 +70,8 @@ p.center{
 #loader.open {
     animation-name: slideOut;
     animation-fill-mode: forwards;
-    animation-duration: 2s;
-    animation-delay: 2s;
+    animation-duration: 2.5s;
+    animation-delay: 2.5s;
 }
 #loader {
     display: block;
@@ -146,19 +146,19 @@ p.center{
 
 .drop-shadow img{
 filter: drop-shadow(0px 0px 10px blue);
-animation : blink-fast 1s;
+animation : blink-fast 2s;
 }
 @keyframes blink-fast {
-          0%, 25%, 75%, 100% {
+          50%, 75%, 85% {
             opacity: 1;
           }
-          12.5%, 37.5%, 62.5%, 87.5% {
-            opacity: 0;
+          0% ,45.5%, 55%, 80% {
+            opacity: 0.2;
           }
         }
 
         .blink-fast {
-          animation: blink-fast 1s;
+          animation: blink-fast 2.5s;
         }
 
 
