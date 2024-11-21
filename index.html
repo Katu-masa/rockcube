@@ -114,9 +114,7 @@ p.center{
     transform: translateX(100%);
   }
 }
-#loader .f_logo:before {
-    animation: loadLogo 1.5s;
-}
+
 #loader .f_logo:before {
     content: "";
     display: block;
@@ -126,7 +124,6 @@ p.center{
     position: absolute;
     top: 0;
     left: 100%;
-    animation: loadLogo 1.5s;
 }
 @keyframes loadLogo {
   0% {
@@ -145,14 +142,35 @@ p.center{
         #detailsContent {
         text-align: left; /* テキストを左寄せにする */
     }
+
+
+.drop-shadow img{
+filter: drop-shadow(0px 0px 10px blue);
+animation : blink-fast 1s;
+}
+@keyframes blink-fast {
+          0%, 25%, 75%, 100% {
+            opacity: 1;
+          }
+          12.5%, 37.5%, 62.5%, 87.5% {
+            opacity: 0;
+          }
+        }
+
+        .blink-fast {
+          animation: blink-fast 1s;
+        }
+
+
+
     </style>
 </head>
 <body>
 <p >
     <div id="loader" class="open">
         <div class="f_logo">
-            <font face="cursive" size="10"><b>ROCK CUBE</b></font>
-         <img src="ロゴ.jpg" alt="logo">
+            <div class="drop-shadow">
+         <img src="画像3.png" alt="logo"></div>
          </div>
     </div>
     <div id="start-container" ><p class="center">
