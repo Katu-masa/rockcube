@@ -2,7 +2,7 @@
 <html lang="ja">
 
 <head>
-   <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,13 +36,23 @@
 
         .button {
             background-color: yellow;
+            /* 背景色を黄色 */
             border: none;
+            /* 枠線を消す */
             width: 40%;
+            /* ボタン幅を調整 */
             padding: 10px 20px;
+            /* ボタン内の余白 */
             margin: 10px;
+            /* ボタン間の縦余白 */
             cursor: pointer;
+            /* カーソルを指マークに */
             border-radius: 5px;
+            /* 角を丸く */
+            text-align: center;
+            /* テキストを中央揃え */
         }
+
 
         #result {
             display: none;
@@ -174,8 +184,7 @@
             47.5%,
             52.5%,
             57.5%,
-            77.5%
-            {
+            77.5% {
                 opacity: 0.2;
             }
         }
@@ -203,6 +212,42 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #prevButton {
+            background-color: gray;
+            /* 背景色を灰色 */
+            color: white;
+            /* テキストを白 */
+            width: 50%;
+            /* ボタン幅を調整 */
+            margin-top: 20px;
+            /* 上に余白を作る */
+            text-align: center;
+            /* テキスト中央寄せ */
+            border: none;
+            /* ボーダーを削除 */
+            border-radius: 5px;
+            /* 角を丸く */
+            padding: 10px;
+            /* パディング調整 */
+            position: static;
+            /* 相対配置 */
+            cursor: pointer;
+            /* カーソルを指に */
+        }
+
+        .aligncenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        #options {
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -234,10 +279,16 @@
     <div id="question-container">
         <h2 id="question-text"></h2>
         <div id="options"></div>
+        <div class="aligncenter">
+            <button id="prevButton" class="button" onclick="prevQuestion()" style="display: none;">前の質問に戻る</button>
+        </div>
     </div>
+
     </p>
-    <div id="result"><p>
-        <img src="ロゴ.png" width="200Px"></p>  体力測定結果
+    <div id="result">
+        <p>
+            <img src="ロゴ.png" width="200Px">
+        </p> 体力測定結果
         <canvas id="myRadar" style="width: 100%; height: 300px;"></canvas>
         <div class="flex">
             <img id="gazo" name="gazo" style="height: 100px">
@@ -292,6 +343,8 @@
         }
 
         function showQuestion() {
+            const prevButton = document.getElementById("prevButton");
+
             if (currentQuestionIndex < questions.length) {
                 const question = questions[currentQuestionIndex];
                 document.getElementById("question-text").textContent = question.text;
@@ -304,10 +357,45 @@
                     button.onclick = () => selectOption(index);
                     optionsContainer.appendChild(button);
                 });
+
+                // 最初の質問では前の質問ボタンを非表示
+                if (currentQuestionIndex === 0) {
+                    prevButton.style.display = "none";
+                } else {
+                    prevButton.style.display = "block";
+                }
             } else {
                 showResult();
             }
         }
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                const lastScore = point.pop(); // 最後のスコアを取得して削除
+                if (lastScore) {
+                    totalScore -= lastScore; // 合計スコアを減少
+                }
+
+                // maxpointと関連する値をリセットして再計算
+                maxpoint = 0;
+                maxpointi = 0;
+                maxpointii = 0;
+
+                for (let i = 0; i <= currentQuestionIndex; i++) {
+                    if (point[i] > maxpoint) {
+                        maxpoint = point[i];
+                        maxpointi = i + 1; // 質問番号（1始まり）
+                        maxpointii = 0;
+                    } else if (point[i] === maxpoint) {
+                        maxpointii = i + 1; // 同じスコアの質問番号
+                    }
+                }
+
+                showQuestion();
+            }
+        }
+
+
 
         function selectOption(index) {
             totalScore += questions[currentQuestionIndex].scores[index];
@@ -354,18 +442,12 @@
 
         function showResult() {
             ShowImage();
-            let tunayosi = 0;
-            for (let i = 0; i < point.length; i++) {
-                tunayosi = tunayosi + point[i];
-            }
+
             let totalPoints = point.reduce((acc, val) => acc + val, 0);
             document.getElementById("question-container").style.display = "none";
             document.getElementById("result").style.display = "block";
             document.getElementById("detailButton").style.display = "block";
-            if (tunayosi == 12) {
-                document.getElementById("result-text").innerText = `${userName}さんは 全項目満点です!! \n あなたなら綱吉バッチが狙えるかも!? `;
-            }
-            else if (maxpointi == 1) {
+            if (maxpointi == 1) {
                 document.getElementById("result-text").innerText = `${userName}さんは ムシ タイプです。\n 総合点は ${totalScore}点です`;
             } else if (maxpointi == 2) {
                 document.getElementById("result-text").innerText = `${userName}さんは ヤモリ タイプです。\n 総合点は ${totalScore}点です`;
