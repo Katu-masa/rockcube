@@ -18,7 +18,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 10px;
+            margin: 5px;
             font-family: Arial, sans-serif;
             vertical-align: text-top;
         }
@@ -305,12 +305,36 @@
 
     <script>
         const questions = [
-            { text: "質問1: ビーストメーカー7秒ぶら下がれるのは何mm？", options: ["15mm", "10mm", "7mm", "5mm"], scores: [1, 2, 3, 4] },
-            { text: "質問2: スローパー持てる?", options: ["10秒以下", "10秒～30秒", "30秒～1分", "1分以上"], scores: [1, 2, 3, 4] },
-            { text: "質問3: 懸垂何回できる？", options: ["5回未満", "5～10回", "11～20回", "20回以上"], scores: [1, 2, 3, 4] },
-            { text: "質問4: 柔軟性ある?", options: ["5回未満", "5～10回", "11～20回", "20回以上"], scores: [1, 2, 3, 4] },
-            { text: "質問5: スラブできる？", options: ["5回未満", "5～10回", "11～20回", "20回以上"], scores: [1, 2, 3, 4] },
-            { text: "質問6: コーディネーションできる？", options: ["できない", "できそう", "できる", "得意"], scores: [1, 2, 3, 4] }
+            { text: "【カチ種目】質問1: キャンパスラング大に何秒ぶら下がっていられますか？", options: ["30秒以上", "20秒以上", "10秒以上", "10秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【カチ種目】質問2: キャンパスラング小に何秒ぶら下がっていられますか？", options: ["30秒以上", "20秒以上", "10秒以上", "10秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【カチ種目】質問3: キャンパスラング大に片手(どっちでも可)で何秒ぶら下がっていられますか？", options: ["15秒以上", "10秒以上", "5秒以上", "5秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【カチ種目】質問4: ビーストメーカー10mmに何秒ぶら下がっていられますか？", options: ["15秒以上", "10秒以上", "5秒以上", "5秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【カチ種目】質問5: ビーストメーカー8mmに何秒ぶら下がっていられますか？", options: ["15秒以上", "10秒以上", "5秒以上", "5秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【カチ種目】質問6: ビーストメーカー6mmに何秒ぶら下がっていられますか？", options: ["10秒以上", "6秒以上", "3秒以上", "3秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【スローパー種目】質問7: WoodyGoody木製スローパー小に何秒ぶら下がっていられますか？", options: ["30秒以上", "20秒以上", "10秒以上", "10秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【スローパー種目】質問8: WoodyGoody木製スローパー中に何秒ぶら下がっていられますか？", options: ["30秒以上", "20秒以上", "10秒以上", "10秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【スローパー種目】質問9: WoodyGoody木製スローパー大に何秒ぶら下がっていられますか？", options: ["15秒以上", "10秒以上", "5秒以上", "5秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【スローパー種目】質問10: オテンの指定するホールドに何秒ぶら下がっていられますか？", options: ["30秒以上", "20秒以上", "10秒以上", "10秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【スローパー種目】質問11: 巨大木製ボールに何秒ぶら下がっていられますか？（中指を凹みに合わせて）", options: ["30秒以上", "20秒以上", "10秒以上", "10秒未満"], scores: [4, 3, 2, 1] },
+            { text: "【パワー種目】質問12: 懸垂を何回できますか？", options: ["30回以上", "25回以上", "20回以上", "15回以上", "10回以上", "5回以上", "5回未満"], scores: [4, 3.5, 3, 2.5, 2, 1.5, 1] },
+            { text: "【パワー種目】質問13: 懸垂で引き上げた状態を片手(どっちでも可)で何秒保持できますか？", options: ["15秒以上","15秒以上", "10秒以上", "5秒以上", "5秒未満"], scores: [4, 3.5,3, 2, 1] },
+            { text: "【パワー種目】質問14: 立ちコロを何回できますか？", options: ["10回以上", "7回以上", "4回以上", "1回以上", "できない"], scores: [4, 3.5,3, 2, 1] },
+            { text: "【柔軟性種目】質問15: 立った状態での前屈でどこまでつきますか？", options: ["おでこが膝についていられる", "手のひらが床についていられる", "指先が床についていられる", "何もつかない"], scores: [4, 3, 2, 1] },
+            { text: "【柔軟性種目】質問16: 仰向けの状態で片膝を抱えてどこまでつきますか？", options: ["胸につく", "上体を上げれば胸につく", "もう少しで胸につきそう", "全くつかなそう"], scores: [4, 3, 2, 1] },
+            { text: "【柔軟性種目】質問17: 開脚がどれくらい開きますか？", options: ["完璧に180度開く", "もう少しで180度開く(160~170度)", "人より柔らかいくらい(130~150度)", "普通くらい(100~120度)", "固いくらい(90度いくか行かないか)", "大きめのピザくらい(90度未満)"], scores: [4, 3.5, 3, 2.5, 2, 1] },
+            { text: "【柔軟性種目】質問18: 片足スクワットができますか？", options: ["両脚できる", "片方ならできる", "どっちもできない"], scores: [4, 3, 1] },
+            { text: "【足使い種目】質問19: スラブ壁でオテンの指定するホールド(難易度低)に立って両手を離していられますか？", options: ["いられる", "無理"], scores: [4, 1] },
+            { text: "【足使い種目】質問20: スラブ壁でオテンの指定するホールド(難易度中)に立って両手を離していられますか？", options: ["いられる", "無理"], scores: [4, 1] },
+            { text: "【足使い種目】質問21: スラブ壁でオテンの指定するホールド(難易度高)に立って両手を離していられますか？", options: ["いられる", "無理"], scores: [4, 1] },
+            { text: "【足使い種目】質問22: ペットボトルの蓋に親指だけで立っていられますか？", options: ["いられる", "無理"], scores: [4, 1] },
+            { text: "【コーディネーション種目】質問23: 1級5番は何トライで登れましたか？", options: ["一撃", "5トライ以内", "1day", "2日以上", "登れてない"], scores: [4,3.5, 3, 2, 1] },
+            { text: "【コーディネーション種目】質問24: スラブの2級1番の初手取りは何トライで取れましたか？登れてない人は、さらに近くのホールドからならできましたか？", options: ["一撃", "5トライ以内", "1day", "2日以上", "登れてないが、近くのホールドからなら取れた", "登れてないし、近くのホールドからでも無理だった"], scores: [4, 3.5, 3, 2.5, 2, 1] },
+            { text: "【コーディネーション種目】質問25: 傾斜側の1級10番の初手取り何トライで取れましたか？取れてない人は、さらに近くのホールドからならできましたか？", options: ["一撃", "5トライ以内", "1day", "2日以上", "登れてないが、ひとつ近くのホールドからなら取れた", "登れてないが、一番近くのホールドからなら取れた", "どれも無理だった"], scores: [4, 3.5, 3, 2.5, 2, 1.5, 1] },
+            { text: "【ピンチ種目】質問26: オテンの指定するピンチホールド(難易度低)に何秒ぶら下がっていられますか？ ", options: ["15秒以上", "10秒以上", "5秒以上", "5秒未満", "ぶら下がれない"], scores: [4, 3.5,3, 2, 1] },
+            { text: "【ピンチ種目】質問27: オテンの指定するピンチホールド(難易度中)に何秒ぶら下がっていられますか？", options: ["15秒以上", "10秒以上", "5秒以上", "5秒未満", "ぶら下がれない"], scores: [4, 3.5,3, 2, 1] },
+            { text: "【ピンチ種目】質問28: オテンの指定するピンチホールド(難易度高)に何秒ぶら下がっていられますか？", options: ["15秒以上", "10秒以上", "5秒以上", "5秒未満", "ぶら下がれない"], scores: [4, 3.5,3, 2, 1] },
+            { text: "【ピンチ種目】質問29: オテンの指定するピンチホールド(難易度超高)に何秒ぶら下がっていられますか？", options: ["15秒以上", "10秒以上", "5秒以上", "5秒未満", "ぶら下がれない"], scores: [4, 3.5,3, 2, 1] }
+
         ];
 
         let currentQuestionIndex = 0;
@@ -321,6 +345,7 @@
         var maxpointi = 0;
         var maxpointii = 0;
         var point = [];
+        let tpoint = [0, 0, 0, 0, 0, 0, 0];
         function startSurvey() {
             const nameInput = document.getElementById("name").value;
             const genderInput = document.getElementById("gender").value;
@@ -381,15 +406,7 @@
                 maxpointi = 0;
                 maxpointii = 0;
 
-                for (let i = 0; i <= currentQuestionIndex; i++) {
-                    if (point[i] > maxpoint) {
-                        maxpoint = point[i];
-                        maxpointi = i + 1; // 質問番号（1始まり）
-                        maxpointii = 0;
-                    } else if (point[i] === maxpoint) {
-                        maxpointii = i + 1; // 同じスコアの質問番号
-                    }
-                }
+
 
                 showQuestion();
             }
@@ -400,14 +417,6 @@
         function selectOption(index) {
             totalScore += questions[currentQuestionIndex].scores[index];
             point.push(questions[currentQuestionIndex].scores[index]);
-            if (maxpoint == questions[currentQuestionIndex].scores[index]) {
-                maxpointii = currentQuestionIndex + 1;
-            }
-            else if (maxpoint < questions[currentQuestionIndex].scores[index]) {
-                maxpointi = currentQuestionIndex + 1;
-                maxpoint = questions[currentQuestionIndex].scores[index];
-                maxpointii = 0;
-            }
             currentQuestionIndex++;
             showQuestion();
         }
@@ -436,17 +445,37 @@
             } else if (maxpointi == 6) {
                 document.getElementById("gazo").src = "ターザン.png";
                 document.getElementById("gazo").alt = "ターザン";
+            } else if (maxpointi == 7) {
+                document.getElementById("gazo").src = "ロボット.png";
+                document.getElementById("gazo").alt = "ロボット";
             }
         }
 
 
         function showResult() {
-            ShowImage();
+           
+            tpoint[0] = (point[0] + point[1] + point[2] + point[3] + point[4] + point[5]) / 6;
+                tpoint[1] = (point[6] + point[7] + point[8] + point[9] + point[10]) / 5;
+                tpoint[2] = (point[11] + point[12] + point[13]) / 3;
+                tpoint[3] = (point[14] + point[15] + point[16] + point[17]) / 4;
+                tpoint[4] = (point[18] + point[19] + point[20] + point[21]) / 4;
+                tpoint[5] = (point[22] + point[23] + point[24]) / 3;
+                tpoint[6] = (point[25] + point[26] + point[27] + point[28]) / 4;
 
+                totalScore = (tpoint[0] + tpoint[1] + tpoint[2] + tpoint[3] + tpoint[4] + tpoint[5] + tpoint[6]) / 7 * 25;
+                for (let i = 0; i <= 6; i++) {
+                    if (tpoint[i] > maxpoint) {
+                        maxpoint = tpoint[i];
+                        maxpointi = i + 1; // 質問番号（1始まり）
+                    }
+                }
+            ShowImage();
+console.log(maxpointi);
             let totalPoints = point.reduce((acc, val) => acc + val, 0);
             document.getElementById("question-container").style.display = "none";
             document.getElementById("result").style.display = "block";
             document.getElementById("detailButton").style.display = "block";
+            totalScore = Math.round(totalScore);
             if (maxpointi == 1) {
                 document.getElementById("result-text").innerText = `${userName}さんは ムシ タイプです。\n 総合点は ${totalScore}点です`;
             } else if (maxpointi == 2) {
@@ -459,6 +488,8 @@
                 document.getElementById("result-text").innerText = `${userName}さんは 忍者 タイプです。\n 総合点は ${totalScore}点です`;
             } else if (maxpointi == 6) {
                 document.getElementById("result-text").innerText = `${userName}さんは ターザン タイプです。\n 総合点は ${totalScore}点です`;
+            } else if (maxpointi == 7) {
+                document.getElementById("result-text").innerText = `${userName}さんは ロボット タイプです。\n 総合点は ${totalScore}点です`;
             }
 
             if (genderf == 1) {
@@ -466,7 +497,7 @@
                     [{
                         label: 'あなたの体力測定結果',
                         lineTension: 0, // ベジェ曲線を無効化
-                        data: [point[0], point[1], point[2], point[3], point[4], point[5]],
+                        data: [tpoint[0], tpoint[1], tpoint[2], tpoint[3], tpoint[4], tpoint[5], tpoint[6]],
                         backgroundColor: 'RGBA(96,218,255, 0.4)',
                         borderColor: 'RGBA(101,96,255, 1)',
                         borderWidth: 1,
@@ -478,7 +509,7 @@
                     [{
                         label: 'あなたの体力測定結果',
                         lineTension: 0, // ベジェ曲線を無効化
-                        data: [point[0], point[1], point[2], point[3], point[4], point[5]],
+                        data: [tpoint[0], tpoint[1], tpoint[2], tpoint[3], tpoint[4], tpoint[5], tpoint[6]],
                         backgroundColor: 'RGBA(255,96,202, 0.4)',
                         borderColor: 'RGBA(182,39,93, 1)',
                         borderWidth: 1,
@@ -489,7 +520,7 @@
             var myRadar = new Chart(myRadarElement, {
                 type: 'radar', // チャートのタイプ
                 data: { // チャートの内容
-                    labels: ["カチ", "スローパー", "パワー/体幹", "柔軟性", "足使い/バランス", "コーディネーション"],
+                    labels: ["カチ", "スローパー", "パワー/体幹", "柔軟性", "足使い/バランス", "コーディネーション", "ピンチ"],
                     datasets: datasets
                 },
                 options: {
@@ -508,7 +539,6 @@
             const detailedResultsDiv = document.getElementById("detailedResults");
             let detailsContent = document.getElementById("detailsContent");
             var details;
-            details = `2345`;
             if (maxpointi == 1) {
                 details = `あなたは虫タイプです。どんなに細かい小さなホールドでも重さを感じさせずに持ててしまうそ
 の様子は、まるで虫。現代のクライミングシーンでは、ホールドが巨大化していく中でそのカチを
@@ -555,6 +585,13 @@
 バネを最大限に活かした登りは、常に歓声の的でしょう！静的なクライミングも得意ですか？そ
 れなら言うことはありません。もしそっちのクライミングをあまりしないようであれば、そっち
 もまた面白さがありますので、そっちでもその身体能力を存分に発揮してください！`;
+            }
+            if (maxpointi == 7) {
+                details = `あなたはロボットタイプです。あなたのそのホールドをも砕くそ
+                のピンチ力はロボット級。そのピンチ力を使った登りは圧巻で、見ている人に驚愕されます。
+                あなたは自覚がないと思いますが、あなたが普通に持てるピンチホールドは、一般クライマー
+                には持てないのです。ジムでは８割のホールドがピンチで持てると言われることもあります。
+                そのピンチ力を活かしていきましょう！`;
             }
             detailsContent.innerHTML = details; // innerHTMLに詳細をセット
 
